@@ -1,3 +1,3 @@
-# Example Site - The Obligatory "Just Another Blog"
+# Example Site - Blog
 
-A full-stack application using React, GraphQL, & Amazon Web Services (API Gateway + Cloudfront + DynamoDb + Lambda + S3).
+The Obligatory "Just Another Blog".  A full-stack application using React, Express, GraphQL, & Amazon Web Services (API Gateway + Cloudfront + DynamoDb + Lambda + S3).
