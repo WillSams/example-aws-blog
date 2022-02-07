@@ -1,0 +1,72 @@
+org: <your org here>
+app: example-blog-backend
+service: example-blog-backend
+frameworkVersion: "3"
+
+custom:
+  tableName: "Blog-${self:provider.stage}"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: staging
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [Blog, Arn]
+  environment:
+    SOCCER_TABLE: ${self:custom.tableName}
+    TOKEN_SECRET: <your token here>
+
+functions:
+  api:
+    handler: handler.handler
+    events:
+      - httpApi: "*"
+
+resources:
+  Resources:
+    Blog:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+          - AttributeName: Id
+            AttributeType: S
+          - AttributeName: Metadata
+            AttributeType: S
+          - AttributeName: Author
+            AttributeType: S
+        KeySchema:
+          - AttributeName: Id
+            KeyType: HASH
+          - AttributeName: Metadata
+            KeyType: RANGE
+        GlobalSecondaryIndexes:
+          - IndexName: MetadataIndex
+            KeySchema:
+              - AttributeName: Metadata
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+          - IndexName: MetadataCommentsIndex
+            KeySchema:
+              - AttributeName: Metadata
+                KeyType: HASH
+              - AttributeName: Author
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
+        BillingMode: PAY_PER_REQUEST
+
+plugins:
+  - serverless-offline
