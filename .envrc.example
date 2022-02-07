@@ -3,7 +3,6 @@ export NODE_ENV=development
 export AWS_REGION=localhost
 
 export DYNAMODB_PORT=8042
-export BLOG_TABLE=Blog-${NODE_ENV}
 
 export API_PORT=4040
 export REACT_APP_API_URL=http://localhost:${API_PORT}
