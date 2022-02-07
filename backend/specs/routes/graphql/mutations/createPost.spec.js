@@ -15,7 +15,7 @@ describe('Route - Mutations - /api/graphql', () => {
     const params = {
       postId: 'test-post-4',
       title: 'This is another test',
-      author: 'John Smit',
+      author: 'John Smith',
       content: '<p>Lorem Ipsum...forever?</p>'
     };
 

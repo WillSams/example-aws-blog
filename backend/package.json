@@ -1,7 +1,7 @@
 {
   "name": "example-blog-backend",
   "version": "1.0.0",
-  "description": "Example API using GraphQL and AWS DynamoDB SDK.",
+  "description": "Example API using Express JS, GraphQL and AWS DynamoDB SDK.",
   "main": "bootstrap.js",
   "dependencies": {
     "apollo-server-core": "^3.6.1",
