@@ -1,7 +1,6 @@
 {
-  "name": "deportivocarolina-frontend",
-  "version": "0.5.2",
-  "private": true,
+  "name": "example-blog-frontend",
+  "version": "1.0.0",
   "scripts": {
     "build": "npm run pre-build && webpack",
     "deploy": "npm run build && serverless deploy --stage staging",

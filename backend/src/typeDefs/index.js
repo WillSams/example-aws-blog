@@ -22,7 +22,6 @@ type Post {
 type Comment {
   Id: String!
   Metadata: String!
-  CommentName: String!
   Author: String!
   Content: String!
   CommentDate: String!
