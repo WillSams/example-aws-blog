@@ -9,9 +9,9 @@ const { reseedDb } = require('../..');
 describe('Resolvers - Queries', () => {
   before(() => reseedDb());
 
-  it('`posts` query should retrieve all posts', async () => {
-    const result = await posts(null);
-
-    expect(result.length).to.equal(3);
+  it('`posts` query should retrieve all posts', () => {
+    posts(null).then(result => {
+      expect(result.length).to.equal(3);
+    });
   });
 });

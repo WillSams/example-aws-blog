@@ -11,9 +11,9 @@ describe('Resolvers - Queries', () => {
 
   const params = { postId: '2' };
 
-  it('`comments` query should retrieve comments for given post', async () => {
-    const result = await comments(null, { ...params });
-
-    expect(result.length).to.equal(2);
+  it('`comments` query should retrieve comments for given post', () => {
+    comments(null, { ...params }).then(result => {
+      expect(result.length).to.equal(2);
+    });
   });
 });

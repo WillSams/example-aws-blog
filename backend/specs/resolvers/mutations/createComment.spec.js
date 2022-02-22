@@ -16,19 +16,20 @@ describe('Resolvers - Mutation', () => {
     content: '<p>Lorem ipsum dolor sit amet consectetur adipiscing elit leo consequat</p>',
   };
 
-  it('`createComment` mutation should create comment', async () => {
-    const result = await createComment(null, { input: { ...params } }).then(data => data);
+  it('`createComment` mutation should create comment', () => {
+    createComment(null, { input: { ...params } }).then(result => {
 
-    result.should.have.property('Id');
-    expect(result.Id).to.equal(`Post-${params.postId}`);
+      result.should.have.property('Id');
+      expect(result.Id).to.equal(`Post-${params.postId}`);
 
-    result.should.have.property('Metadata');
-    expect(result.Metadata).to.equal(`Comment-${params.commentId}`);
+      result.should.have.property('Metadata');
+      expect(result.Metadata).to.equal(`Comment-${params.commentId}`);
 
-    result.should.have.property('Author');
-    expect(result.Author).to.equal(params.author);
+      result.should.have.property('Author');
+      expect(result.Author).to.equal(params.author);
 
-    result.should.have.property('Content');
-    expect(result.Content).to.equal(params.content);
+      result.should.have.property('Content');
+      expect(result.Content).to.equal(params.content);
+    });
   });
 });
