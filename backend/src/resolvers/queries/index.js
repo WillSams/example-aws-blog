@@ -1,23 +1,23 @@
 const { dbGet, dbQuery } = require('../../utils/responses');
 const { Comment, Post } = require('../../models');
 
-const comment = async (root, { postId, commentId }) =>
-  await dbQuery({ query: Comment.get({ postId, commentId }) })
+const comment = (root, { postId, commentId }) =>
+  dbQuery({ query: Comment.get({ postId, commentId }) })
     .then(data => data[0]);
 
 const comments = async (root, { postId }) =>
-  await dbQuery({ query: Comment.queryByPost({ postId }) })
+  dbQuery({ query: Comment.queryByPost({ postId }) })
     .then(data => data);
 
 const post = async (root, { postId }) =>
-  await dbGet({ query: Post.get({ postId }) })
+  dbGet({ query: Post.get({ postId }) })
     .then(async data => {
-      const c = await comments(root, { postId });
+      const c = comments(root, { postId });
       return Object.assign(data, { Comments: c, });
     });
 
-const posts = async () =>
-  await dbQuery({ query: Post.queryAll })
+const posts = (root, { }) =>
+  dbQuery({ query: Post.queryAll })
     .then(data => data);
 
 module.exports = {

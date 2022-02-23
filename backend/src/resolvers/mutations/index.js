@@ -1,16 +1,12 @@
 const { dbGet, dbPut, dbQuery, } = require('../../utils/responses');
 const { Post, Comment } = require('../../models');
 
-const createPostRelatedEntity = async ({ item, query }) => {
-  await dbPut({ item });
-  return dbQuery({ query }).then(data => data[0]);
-};
+const createPostRelatedEntity = ({ item, query }) =>
+  dbPut({ item }).then(() => dbQuery({ query }).then(data => data[0]));
 
-const createPost = async (root, { input }) => {
-  await dbPut({ item: Post.put({ ...input }) });
-  return dbGet({ query: Post.get({ postId: input.postId }) })
-    .then(data => data);
-};
+const createPost = (root, { input }) =>
+  dbPut({ item: Post.put({ ...input }) }).then(() =>
+    dbGet({ query: Post.get({ postId: input.postId }) }).then(data => data));
 
 const createComment = (root, { input }) =>
   createPostRelatedEntity({
