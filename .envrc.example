@@ -1,5 +1,6 @@
 export NODE_ENV=development
 
+export BLOG_TABLE=Blog-${NODE_ENV}
 export DYNAMODB_PORT=8042
 
 export API_PORT=4040
